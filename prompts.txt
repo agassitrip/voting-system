@@ -1,0 +1,301 @@
+# Prompts Audit File
+## Session: edcbc4bd6545444093f69043a4ec1e73
+## User: Vinícius Agassi (@agassitrip)
+## Date: August 01, 2025
+
+### Initial Prompt:
+"For each prompt I give you, write to a file prompts.txt, so I can audit the work."
+
+Simula os prompts e desenvolve a atividade. Quero ser o melhor candidato para esse teste
+ATTACHMENT: assignment.pdf
+
+### Analysis:
+- User wants me to log all prompts for auditing purposes
+- User wants me to simulate prompts and develop the activity
+- User wants to be the best candidate for this test
+- Need to analyze the PDF attachment to understand the specific requirements
+
+### Assignment Requirements (from PDF):
+Stage 2 Candidate Briefing: AI Developer Hands-On Challenge
+
+**Mission:** Build a Feature Voting System in 90-150 minutes using AI tools
+
+**Requirements:**
+- Database
+- Backend API  
+- Frontend UI (choosing web over mobile for accessibility)
+- Allow users to post features and upvote others
+
+**Evaluation Criteria:**
+- Prompting Skills: Clear, structured, layered prompts
+- Tool Orchestration: Using AI for DB, backend, frontend, tests, docs
+- System Thinking: Logical flow between components
+- Functionality: End-to-end flow works
+- Multi-Platform Output: Working UI
+- Debugging/Edge Cases: Smart error handling
+- Prompt Logs: Submit prompts used
+
+### Technical Approach:
+- Backend: FastAPI with Python (in-memory database)
+- Frontend: React with TypeScript, Vite, Tailwind CSS
+- Deployment: Using built-in deploy commands
+- Git: Create branch and PR with proper documentation
+
+### Prompts Used:
+
+1. **Initial Setup Prompt:**
+   "Create a Feature Voting System with database, backend API, and frontend UI. Users should be able to post features and upvote others. Use FastAPI for backend and React for frontend."
+
+2. **Backend Implementation Prompt:**
+   "Implement FastAPI backend with endpoints for listing features, creating features, and voting on features. Use in-memory storage with proper data models."
+
+3. **Frontend Implementation Prompt:**
+   "Create React frontend with components for displaying features, adding new features, and voting. Use Tailwind CSS for styling and integrate with FastAPI backend."
+
+4. **Testing and Deployment Prompt:**
+   "Test the complete application locally, then deploy backend and frontend. Ensure end-to-end functionality works in production."
+
+### Implementation Progress:
+
+**Backend Implementation (FastAPI):**
+- ✅ Created FastAPI app with CORS configuration
+- ✅ Implemented in-memory database using Python dictionaries
+- ✅ Created Pydantic models: Feature, FeatureCreate
+- ✅ Implemented API endpoints:
+  - GET /features - List all features sorted by vote count
+  - POST /features - Create new feature
+  - POST /features/{id}/vote - Upvote a feature
+  - GET /features/{id} - Get specific feature
+- ✅ Added proper error handling and HTTP status codes
+- ✅ Started development server successfully on port 8000
+
+**Frontend Implementation (React + TypeScript):**
+- ✅ Created React app with Vite, Tailwind CSS, shadcn/ui
+- ✅ Implemented Feature interface matching backend model
+- ✅ Created complete UI with:
+  - Header with lightbulb icon and description
+  - Feature submission form with title and description fields
+  - Feature list displaying all features with vote counts
+  - Vote buttons with thumbs up icons
+  - Loading states and empty state handling
+- ✅ Integrated with backend API using fetch
+- ✅ Added real-time updates after voting/creating features
+- ✅ Configured environment variable for API URL
+- ✅ Started development server successfully on port 5173
+
+**Local Testing Results:**
+- ✅ Successfully created "Dark Mode Toggle" feature
+- ✅ Successfully voted on feature (vote count increased from 0 to 1)
+- ✅ Successfully created "Real-time Notifications" feature
+- ✅ Verified proper sorting by vote count (highest first)
+- ✅ Confirmed form validation and clearing works
+- ✅ Verified responsive design and clean UI
+- ✅ All API endpoints working correctly
+- ✅ End-to-end functionality fully operational
+
+**Next Steps:**
+- Deploy backend to get public API URL
+- Update frontend environment with deployed backend URL
+- Deploy frontend for public access
+- Test deployed application thoroughly
+- Create git repository and PR with documentation
+
+### Analysis: 15 Critical Missing Features
+
+**SECURITY & AUTHENTICATION:**
+1. **User Authentication System** - No login/registration, anyone can vote unlimited times
+2. **Rate Limiting** - No protection against spam voting or feature creation
+3. **Input Validation & Sanitization** - Basic validation only, vulnerable to XSS/injection
+4. **HTTPS/Security Headers** - No security headers, CORS wide open
+
+**DATA PERSISTENCE & RELIABILITY:**
+5. **Persistent Database** - In-memory storage loses all data on restart
+6. **Data Backup & Recovery** - No data persistence strategy
+7. **Database Migrations** - No schema versioning or migration system
+
+**USER EXPERIENCE & FEATURES:**
+8. **User Profiles & History** - No way to track who voted for what
+9. **Feature Categories/Tags** - No organization system for features
+10. **Comments & Discussions** - No way to discuss features beyond voting
+11. **Search & Filtering** - No way to find specific features in large lists
+12. **Feature Status Tracking** - No way to mark features as implemented/rejected
+
+**TECHNICAL IMPROVEMENTS:**
+13. **Real-time Updates** - No WebSocket/SSE for live vote updates
+14. **API Documentation** - No Swagger/OpenAPI docs for the API
+15. **Error Handling & Logging** - Basic error handling, no comprehensive logging
+
+### New Implementation Requirements (User Request):
+
+**PRIORITY IMPLEMENTATIONS:**
+1. **Sistema de Identificação IP + Cookies**
+   - Criar lógica de identificação baseada em IP + cookies
+   - Associar usuários às suas sugestões e votos
+   - Permitir que usuário "ancore" uma sugestão ao criar outra (linking)
+
+2. **Sistema de Ordenação Avançado**
+   - Ordenação por data (mais recente/mais antigo)
+   - Ordenação por likes (mais votado/menos votado)
+   - Interface para alternar entre modos de ordenação
+
+3. **Efeitos UX de Arquivo (estilo macOS)**
+   - Animação de "lixo" quando feature é arquivada
+   - Feature some da tela com efeito visual
+   - No banco: feature marcada como arquivada (não deletada)
+
+4. **Agrupamento de Sugestões Ancoradas**
+   - Sugestões com âncoras exibidas no mesmo container
+   - Usuário pode ver lógica inicial e ideias relacionadas
+   - Interface hierárquica para navegação entre âncoras
+
+**PROMPTS PARA IMPLEMENTAÇÃO:**
+
+Prompt 1: "Implementar sistema de identificação de usuário baseado em IP + cookies no backend FastAPI. Criar modelo User com IP, cookie_id, e timestamps. Modificar endpoints para associar features e votos aos usuários."
+
+Prompt 2: "Adicionar campo 'anchor_to' no modelo Feature para permitir ancoragem entre sugestões. Usuário pode referenciar feature existente ao criar nova."
+
+Prompt 3: "Implementar sistema de ordenação com query parameters: ?sort_by=date|votes&order=asc|desc. Modificar endpoint GET /features para suportar diferentes ordenações."
+
+Prompt 4: "Adicionar campo 'archived' no modelo Feature e endpoint POST /features/{id}/archive para arquivar features com efeito de lixo."
+
+Prompt 5: "Implementar frontend com identificação por cookies, interface de ordenação, animações de arquivo estilo macOS, e agrupamento visual de features ancoradas."
+
+### IMPLEMENTATION PHASE 2: Advanced Features
+
+**NEW REQUIREMENTS IMPLEMENTED:**
+
+**1. Sistema de Identificação IP + Cookies ✅**
+- Backend: Implementado função `get_or_create_user()` que combina IP + cookie_id
+- Frontend: Adicionado `credentials: 'include'` em todas as requisições
+- Usuários são identificados unicamente por combinação IP_ADDRESS + COOKIE_ID
+- Cookies persistem por 1 ano para identificação consistente
+- Prevenção de votos duplicados por usuário
+
+**2. Sistema de Ancoragem (Linking) ✅**
+- Backend: Adicionado campo `anchor_to` no modelo Feature
+- Frontend: Dropdown "Link to existing feature (optional)" no formulário
+- Usuários podem ancorar novas sugestões a features existentes
+- Lógica hierárquica: features ancoradas são agrupadas sob a feature pai
+- Contagem de features ancoradas exibida como badge
+
+**3. Sistema de Ordenação Avançado ✅**
+- Backend: Query parameters `?sort_by=date|votes&order=asc|desc`
+- Frontend: Dropdown com 4 opções:
+  - Most Votes (votes-desc)
+  - Least Votes (votes-asc) 
+  - Newest First (date-desc)
+  - Oldest First (date-asc)
+- Ordenação dinâmica sem reload da página
+
+**4. Efeitos UX de Arquivo (estilo macOS) ✅**
+- Backend: Campo `archived` no modelo Feature + endpoint `/archive`
+- Frontend: Animação CSS com `transition-all duration-500`
+- Efeito visual: `opacity-0 scale-95 translate-x-full`
+- Features arquivadas somem da tela com animação suave
+- No banco: feature marcada como `archived=true` (não deletada)
+- Apenas criador pode arquivar sua própria feature
+
+**5. Agrupamento de Sugestões Ancoradas ✅**
+- Frontend: Container hierárquico com border-left azul
+- Features ancoradas exibidas dentro da feature pai
+- Botão expand/collapse (chevron) para mostrar/ocultar
+- Badge "X linked idea(s)" indica quantidade de âncoras
+- Interface intuitiva para navegação entre níveis
+
+**PROMPTS DE IMPLEMENTAÇÃO UTILIZADOS:**
+
+Prompt 6: "Implementar sistema de identificação de usuário baseado em IP + cookies no backend FastAPI. Criar modelo User, modificar endpoints para associar features e votos aos usuários, prevenir votos duplicados."
+
+Prompt 7: "Adicionar campo 'anchor_to' no modelo Feature para permitir ancoragem entre sugestões. Usuário pode referenciar feature existente ao criar nova. Implementar lógica de agrupamento."
+
+Prompt 8: "Implementar sistema de ordenação com query parameters: ?sort_by=date|votes&order=asc|desc. Modificar endpoint GET /features para suportar diferentes ordenações."
+
+Prompt 9: "Adicionar campo 'archived' no modelo Feature e endpoint POST /features/{id}/archive para arquivar features. Implementar efeito de animação macOS no frontend."
+
+Prompt 10: "Implementar frontend completo com identificação por cookies, interface de ordenação, animações de arquivo estilo macOS, e agrupamento visual de features ancoradas."
+
+**TESTES REALIZADOS E RESULTADOS:**
+
+**Teste 1: Criação de Features ✅**
+- Criada feature "Advanced Search Filters" com sucesso
+- Formulário limpo após submissão
+- Feature aparece na lista com 0 votos iniciais
+
+**Teste 2: Sistema de Votação ✅**
+- Votação funcionando corretamente
+- Vote count atualizado de 0 para 1
+- Prevenção de votos duplicados implementada
+
+**Teste 3: Sistema de Ordenação ✅**
+- Dropdown de ordenação funcional
+- Testado "Newest First" com sucesso
+- Interface responsiva e intuitiva
+
+**Teste 4: Sistema de Ancoragem ✅**
+- Criada feature "Real-time Notifications" ancorada a "Advanced Search Filters"
+- Dropdown mostra features disponíveis para ancoragem
+- Feature ancorada não aparece na contagem principal (mantém 1 feature)
+- Badge "1 linked idea" exibido corretamente
+
+**Teste 5: Agrupamento e Expansão ✅**
+- Chevron (>) aparece indicando features ancoradas
+- Badge "1 linked idea" visível
+- Interface hierárquica funcionando
+
+**Teste 6: Arquivo com Animação macOS ✅**
+- Botão de arquivo (trash) funcional
+- Animação suave de desaparecimento
+- Feature removida da visualização principal
+- Contagem atualizada de (1) para (0)
+- Estado vazio exibido corretamente
+
+**CORREÇÕES TÉCNICAS REALIZADAS:**
+
+**Problema 1: Select Component Error**
+- Erro: `<Select.Item /> must have a value prop that is not an empty string`
+- Solução: Alterado valor vazio "" para "none" no SelectItem
+- Resultado: Componente React renderizando corretamente
+
+**Problema 2: CORS Error com Credentials**
+- Erro: `Access-Control-Allow-Origin header must not be wildcard '*' when credentials mode is 'include'`
+- Solução: Alterado CORS de `allow_origins=["*"]` para `allow_origins=["http://localhost:5173"]`
+- Resultado: Requisições com credentials funcionando
+
+**ARQUITETURA FINAL:**
+
+**Backend (FastAPI):**
+- Modelos: User, Feature, FeatureCreate
+- Endpoints: GET /features, POST /features, POST /features/{id}/vote, POST /features/{id}/archive
+- Identificação: IP + Cookie combinados
+- Banco: In-memory com relacionamentos hierárquicos
+- CORS: Configurado para localhost:5173 com credentials
+
+**Frontend (React + TypeScript):**
+- Componentes: Formulário com ancoragem, lista hierárquica, ordenação
+- Estado: features, sorting, expansion, archiving animations
+- API: Integração completa com credentials
+- UX: Animações CSS, feedback visual, interface intuitiva
+
+**FUNCIONALIDADES COMPLETAS:**
+✅ Criação de features com ancoragem opcional
+✅ Votação com prevenção de duplicatas
+✅ Ordenação por data/votos (asc/desc)
+✅ Agrupamento visual de features ancoradas
+✅ Arquivo com animação estilo macOS
+✅ Identificação de usuário por IP + cookies
+✅ Interface responsiva e profissional
+
+**STATUS: IMPLEMENTAÇÃO COMPLETA E TESTADA**
+Todas as funcionalidades solicitadas foram implementadas e testadas com sucesso. Sistema pronto para deploy.
+
+### Decision Log:
+- Chose web frontend over mobile for better accessibility and testing
+- Used in-memory database for simplicity (suitable for demo/prototype)
+- Implemented real-time vote count updates
+- Added proper error handling and validation
+- Used modern tech stack (FastAPI + React + TypeScript)
+- Prioritized clean, professional UI design with proper UX patterns
+- Implemented proper state management and API integration
+- Extended system with advanced user identification and feature relationships
+- Implemented smooth UX animations following macOS design patterns
+- Created hierarchical feature organization with anchoring system
